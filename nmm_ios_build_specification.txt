@@ -1,0 +1,204 @@
+========================================================================
+SPESIFIKASI & PANDUAN PENGEMBANGAN APLIKASI UNKUT EKOSISTEM iOS (IPHONE/IPAD)
+APLIKASI: NMM – Neo Money Management
+========================================================================
+
+Dokumen ini disusun secara mendalam untuk membantu Tim Pengembang (iOS Developer) dalam melakukan porting, rekonstruksi, dan optimasi arsitektur dari aplikasi Android "NMM – Neo Money Management" ke dalam ekosistem Apple iOS (iPhone & iPad). Hal ini mencakup arsitektur, detail setiap screen, skema data, manajemen bahasa lokal, serta solusi keamanan real-time yang setara dengan fitur privasi mutakhir di Android.
+
+------------------------------------------------------------------------
+1. IDENTITAS & PRINSIP DESAIN UTAMA (UI/UX)
+------------------------------------------------------------------------
+- Nama Aplikasi: NMM – Neo Money Management
+- Skema Warna: Tema Gelap Cosmic (Cosmic Dark Slate) dengan aksen warna modern yang kontras (Golden-orange untuk warning/warning-gold, Hijau segar untuk pemasukan/income, Merah cerah untuk pengeluaran/expense).
+- Desain UI: Mengikuti Apple Human Interface Guidelines (HIG) yang dikombinasikan dengan sentuhan Material 3 dynamic-inspired tokens untuk menjaga konsistensi visual lintas platform.
+- Tipografi: Menyelaraskan heading bergaya display font modern (misal: "Space Grotesk" atau San Francisco Display Heavy) dengan tipe body font monospaced (misal: SF Mono / JetBrains Mono) untuk display angka dan data transaksi agar sangat mudah dipindai (scannable).
+- Pendekatan Layout: "Mobile-First, Adaptive-Always". Mendukung perpindahan layar yang mulus dari iPhone ukuran compact hingga mode multi-panel (List-Detail / Slide Over) pada iPad menggunakan SwiftUI View Layouts yang fluid.
+
+------------------------------------------------------------------------
+2. TEKNOLOGI & ARSITEKTUR REKOMENDASI (iOS)
+------------------------------------------------------------------------
+- Bahasa Pemrograman: Swift 5.10 atau versi terbaru.
+- UI Framework: SwiftUI (Rekomendasi target minimum iOS 16.0+ untuk memanfaatkan performa prima 'NavigationStack' ter-tipe, UI otomatis, dan API modern).
+- Arsitektur Codebase: MVVM (Model-View-ViewModel) yang bersih dengan pembagian layer:
+  - Model: Objek entity murni (SwiftData / CoreData Entities).
+  - ViewModel: Menggunakan dekorator `@MainActor` dan `ObservableObject` (atau makro `@Observable` pada iOS 17+) untuk manajemen state reaktif.
+  - View: SwiftUI Views modular dengan `@StateObject` atau parameter binding yang clean.
+- Manajemen Data Lokal: SwiftData (iOS 17+) atau CoreData (iOS 15/16) untuk penyimpanan offline-first yang super cepat tanpa jeda jaringan.
+
+------------------------------------------------------------------------
+3. RINCIAN MODUL DAN SCREEN APLIKASI
+------------------------------------------------------------------------
+
+A. SplashScreen
+   - Tujuan: Menampilkan logo NMM dengan efek fade-in dan inisialisasi state aplikasi secara sunyi di latar belakang.
+   - Logika: Memeriksa apakah pengguna baru pertama kali memasang aplikasi (onboarding check), mendeteksi setelan bahasa ponsel, dan mengamankan rute awal (bila PIN aktif, arahkan ke Login/PIN Screen).
+
+B. OnboardingScreen
+   - Tujuan: Panduan interaktif bagi pengguna baru untuk mengatur profil dasar finansial.
+   - Fitur Utama:
+     - Pilihan bahasa default.
+     - Pilihan mata uang utama (Rupiah IDR, USD $, EUR €, dll) yang disimpan ke UserDefaults.
+     - Carousel penjelasan nilai guna aplikasi NMM.
+
+C. LoginScreen (PIN & Biometric Authentication)
+   - Tujuan: Gerbang keamanan utama aplikasi sebelum masuk ke area data transaksi privat.
+   - Fitur Utama:
+     - Input keypad bilangan kustom untuk PIN keamanan (4 atau 6 digit).
+     - Integrasi autentikasi biometrik Face ID atau Touch ID menggunakan library native: `LocalAuthentication`.
+     - Logika fallback jika biometrik gagal beberapa kali.
+
+D. DashboardScreen
+   - Tujuan: Pusat kendali keuangan instan pengguna saat pertama kali membuka aplikasi.
+   - Fitur Utama:
+     - Header ringkasan: Total Saldo Aktif, Total Income bulan berjalan, Total Expense bulan berjalan.
+     - Kartu grafik mini visual arus kas harian.
+     - Daftar Transaksi Terbaru: Batas hingga 5 transaksi terakhir dengan tombol shortcut "Lihat Semua".
+     - Floating Action Button (FAB) atau jalan pintas utama di navigasi bawah untuk tambah transaksi baru secara kilat.
+
+E. AddTransactionScreen
+   - Tujuan: Formulir input pemasukan dan pengeluaran yang efisien dan minim ketukan.
+   - Fitur Utama:
+     - Segmented Control untuk menentukan jenis: "Pemasukan (Income)" vs "Pengeluaran (Expense)".
+     - Input Nominal Angka (Numeric-only TextField dengan auto-formatting ribuan sesuai lokasi mata uang).
+     - Picker Kategori dengan ikon berwarna cerah (seperti Kebutuhan, Hiburan, Belanja, Gaji, Investasi, dsb).
+     - Input Tanggal & Catatan/Deskripsi Transaksi.
+     - Opsi opsional: Unggah / ambil foto gambar struk belanja menggunakan `PhotosUI` (PHPickerViewController) yang disimpan di direktori internal lokal Dokumen App.
+
+F. AnalyticsScreen
+   - Tujuan: Menyajikan visualisasi perilaku keuangan dari data historis pengguna secara komprehensif.
+   - Fitur Utama:
+     - Grafik pembagian kategori (Pie / Ring Chart) dan grafik garis aliran kas bulanan (Line Chart).
+     - Rekomendasi penggunaan library: Native `Swift Charts` framework (sangat dioptimalkan untuk performa frame-rate tinggi di iOS).
+     - Filter rentang waktu: Minggu Ini, Bulan Ini, Tahun Ini, atau Kustom Rentang Tanggal.
+
+G. BudgetPlannerScreen
+   - Tujuan: Menetapkan batasan berbelanja agar pengguna dapat menjaga keuangan tetap sehat.
+   - Fitur Utama:
+     - Menetapkan limit anggaran per kategori pengeluaran untuk jangka waktu satu bulan.
+     - Indikator bar progres visual interaktif (warna berubah dari hijau ke kuning, lalu menjadi merah menyala saat mendekati atau melewati batas 100% kuota).
+     - Push Notification lokal (UNUserNotificationCenter) seketika saat ada pengeluaran baru yang menyebabkan anggaran kategori tersebut terlampaui.
+
+H. SavingsGoalScreen
+   - Tujuan: Mengatur target tabungan untuk impian masa depan (misalnya dana darurat, beli gadget, liburan).
+   - Fitur Utama:
+     - Input nama target, total nominal sasaran, dan tenggat waktu penyelesaian.
+     - Progres bar berbentuk circular ring yang elegan demi keindahan estetika.
+     - Tombol untuk menambah atau menarik sumbangan tabungan langsung dari saldo akun utama.
+
+I. HistoryScreen
+   - Tujuan: Lembar pencatatan riwayat transaksi menyeluruh dari awal pemakaian.
+   - Fitur Utama:
+     - Search Bar real-time di bagian atas untuk mencocokkan judul transaksi.
+     - Filter Multi-tab (Kategori, Rentang Tanggal, Jenis Transaksi).
+     - Interaksi Native iOS: Geser baris list untuk menghapus langsung (swipe-to-delete) dan ketuk baris untuk mengedit data transaksi secara langsung.
+
+J. SettingsScreen & Dukungan Pengguna
+   - Tujuan: Kustomisasi penuh aplikasi dan sarana komunikasi dengan pengembang.
+   - Fitur Utama:
+     - Menu Pilihan Bahasa (Localization Switcher).
+     - Toggle Pengaturan Keamanan PIN & Autentikasi Face ID.
+     - Tombol Ekspor Data ke berkas .CSV (menggunakan `ShareLink` SwiftUI atau UIActivityViewController).
+     - Tombol Reset/Wipe Data Aplikasi dengan dialog verifikasi berwarna merah tegas untuk konfirmasi aman.
+     - KARTU DUKUNGAN & MASUKAN (Support & Feedback):
+       - Menyediakan aksi ketuk pada baris feedback untuk mengirimkan email langsung ke: neo.developer.apps@gmail.com
+       - Subjek Default: "Feedback & Masukan Aplikasi NMM (iOS)"
+       - Template Isi Email: "Halo Developer,\n\nBerikut masukan saya untuk aplikasi NMM:\n\n"
+       - Implementasi iOS: Gunakan `MFMailComposeViewController` dari library `MessageUI` (memastikan mengecek `MFMailComposeViewController.canSendMail()`), dengan fallback pembukaan via URL Scheme `mailto:neo.developer.apps@gmail.com?subject=Feedback...` jika aplikasi Mail bawaan tidak dikonfigurasi.
+
+------------------------------------------------------------------------
+4. SISTEM KEAMANAN REAL-TIME SCREEN & MULTITASKING (PENTING!)
+------------------------------------------------------------------------
+Satu pilar krusial pada aplikasi NMM Android adalah kemampuan instan memblokir tampilan layar menjadi hitam pekat (blocked content screen overlay) saat berpindah ke mode Multi-Window/Split-Screen atau saat berpindah ke Recents Menu (App Switcher) agar data angka nominal finansial tidak terekam/terintip.
+
+Berikut adalah taktik implementasi setara yang WAJIB dipasang pada platform iOS:
+
+A. Keamanan App Switcher (Background Privacy Shield)
+   - Masalah: Saat pengguna men-swipe layar ke atas untuk beralih aplikasi (App Switcher), iOS mengambil tangkapan layar (snapshot) dari state terakhir layar aplikasi dan menyimpannya di disk. Hal ini berbahaya karena orang lain dapat melihat data finansial rahasia saat melihat daftar aplikasi background.
+   - Solusi iOS:
+     1. Daftarkan listener pada Application Lifecycle di SwiftUI `App` struct atau `SceneDelegate`:
+        ```swift
+        // Di SwiftUI, amati perubahan scenePhase
+        @Environment(\.scenePhase) var scenePhase
+        ```
+     2. Ketika `scenePhase` berubah menjadi `.inactive` atau `.background` (yang dipicu sesaat setelah gerakan mengusap layar dimulai):
+        - Setel variabel boolean state penanda keamanan: `showPrivacyOverlay = true`.
+        - SwiftUI akan merender selembar View full-screen berwarna hitam polos atau efek blur pekat dengan Logo NMM di tengahnya secara waktu-nyata (instan, tanpa delay).
+     3. Ketika aplikasi kembali aktif (`scenePhase == .active`):
+        - Kembalikan `showPrivacyOverlay = false` untuk membuka blokir layar.
+
+B. Deteksi & Penanganan Multitasking (Split View / Slide Over pada iPadOS)
+   - Masalah: User membuka aplikasi lain berdampingan dengan NMM di iPad, menyebabkan ukuran sisa frame mengecil secara signifikan.
+   - Solusi iOS:
+     1. Amati perubahan properti lingkungan SwiftUI:
+        ```swift
+        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        @Environment(\.verticalSizeClass) var verticalSizeClass
+        ```
+     2. Lakukan pengukuran dimensi layout aktif secara dinamis menggunakan `GeometryReader`.
+     3. Jika ukuran lebar horizontal jatuh ke kategori ringkas `.compact` saat aplikasi berjalan di iPad (menandakan aplikasi sedang disisipkan dalam grid split screen yang sempit), atau jika rasio lebar-tinggi dinilai tidak aman, Anda dapat memperketat visualisasi data dengan mengaburkan nomor nominal saldo keuangan Anda (menggunakan efek `.blur(radius: 8)`) secara real-time.
+
+C. Pencegahan Screenshot & Screen Recording (Setara FLAG_SECURE)
+   - Masalah: Pengguna atau aplikasi malware berbahaya mencoba melakukan tangkapan layar (screenshot) atau rekaman layar (screen capture) pada data keuangan aplikasi NMM.
+   - Solusi iOS (Secure View Wrapper):
+     iOS tidak memiliki properti window sederhana seperti `FLAG_SECURE`, tetapi trik paling efektif dan aman yang direkomendasikan industri adalah membungkus konten SwiftUI ber-angka sensitif menggunakan wrapper UITextField yang disematkan dengan opsi pengaman sistem:
+     1. Buat representasi UIViewRepresentable yang menyematkan `UITextField`.
+     2. Atur UITextField tersebut menjadi mode aman: `textField.isSecureTextEntry = true`.
+     3. Masukkan container utama konten keuangan Anda ke dalam subview layer text field yang diamankan (`layer.sublayers` atau struktur kontainer UITextField).
+     4. Efek Sistem: Begitu OS mendeteksi adanya pengambilan tangkapan layar atau perekaman layar, iOS secara otomatis mengaburkan atau memaksa render area tersebut menjadi hitam pekat pada level sistem framework rendering UIKit, menjaga privasi data mutlak terlindungi.
+
+------------------------------------------------------------------------
+5. STRUKTUR DATA UTAMA (SWIFTDATA / COREDATA SPECIFICATION)
+------------------------------------------------------------------------
+
+Berikut rancangan skema model relasi yang harus diimplementasikan pada database lokal iOS:
+
+A. Entity/Model: Transaction
+   - Properti:
+     - `id: UUID` (Primary Key)
+     - `title: String` (Judul deskripsi transaksi)
+     - `amount: Double` (Jumlah nominal uang)
+     - `type: String` (Nilai: "INCOME" atau "EXPENSE")
+     - `category: String` (Kategori: misal "FOOD", "TRANSPORT", "SALARY")
+     - `date: Date` (Waktu pencatatan transaksi)
+     - `note: String?` (Catatan keterangan opsional)
+     - `receiptImagePath: String?` (Alur path lokal untuk gambar struk)
+
+B. Entity/Model: Budget
+   - Properti:
+     - `id: UUID` (Primary Key)
+     - `category: String` (Nama kategori yang ditentukan batasan anggarannya)
+     - `limitAmount: Double` (Total batas nominal belanja)
+     - `spentAmount: Double` (Total terpakai bulan ini, dihitung dinamis dari Transaction)
+     - `monthYear: String` (Format: "MM-YYYY" sebagai key periode anggaran)
+
+C. Entity/Model: SavingsGoal
+   - Properti:
+     - `id: UUID` (Primary Key)
+     - `title: String` (Nama impian tabungan)
+     - `targetAmount: Double` (Total sasaran target finansial)
+     - `currentAmount: Double` (Saldo tabungan saat ini)
+     - `deadline: Date` (Tenggat waktu pencapaian target)
+
+------------------------------------------------------------------------
+6. SISTEM LOKALISASI BAHASA (MULTILINGUAL SYSTEM)
+------------------------------------------------------------------------
+Berdasarkan TranslationHelper di Android, aplikasi iOS wajib mendukung 6 bahasa utama. Disarankan untuk memetakan key teks berikut ke dalam file berkas String Katalog iOS (`Localizable.xcstrings` pada Xcode 15+):
+
+------------------------------------------------------------------------------
+Key Teks                    | ID (Bhs Indonesia)          | EN (English)
+------------------------------------------------------------------------------
+dashboard_title             | Financial Dashboard         | Financial Dashboard
+support_feedback            | Saran & Bantuan             | Support & Feedback
+feedback_apps               | Masukan & Saran             | App Feedback
+feedback_desc               | Kirim masukan Anda ke...    | Send your feedback to...
+search_hint                 | Cari judul transaksimu...   | Search transaction...
+save_budget_dialog_title    | Simpan Anggaran             | Save Budget
+add_savings_dialog_title    | Tambah Sasaran Menabung     | Add Savings Goal
+------------------------------------------------------------------------------
+*(Tambahkan seluruh pemetaan kamus dari berkas asli TranslationHelper ke berkas .xcstrings)*
+
+========================================================================
+TIM DEVELOPER HARAP SELALU MERUJUK PADA DOKUMEN SPESIFIKASI INI SELAMA
+FASE CODING DAN TESTING DI XCODE UNTUK MEMASTIKAN KUALITAS KINERJA, 
+ESTETIKA VISUAL COSMIC, DAN KEAMANAN FINANSIAL DI EKOSISTEM IPHONE.
+========================================================================

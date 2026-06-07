@@ -1,0 +1,87 @@
+# Build NMM iOS on GitHub macOS runner (Simulator .app)
+# Runs automatically on push/PR when ios/ files change.
+# No Apple Developer account required for this job.
+
+name: iOS Build (Simulator)
+
+on:
+  push:
+    branches: [main, master, develop]
+    paths:
+      - 'ios/**'
+      - '.github/workflows/ios-build.yml'
+  pull_request:
+    paths:
+      - 'ios/**'
+      - '.github/workflows/ios-build.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ios-simulator-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-simulator:
+    name: Build .app (Simulator)
+    runs-on: macos-14
+    timeout-minutes: 30
+
+    defaults:
+      run:
+        working-directory: ios
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.4'
+
+      - name: Show build environment
+        run: |
+          xcodebuild -version
+          xcrun simctl list devices available | head -20
+
+      - name: Build for iOS Simulator
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -project NMM.xcodeproj \
+            -scheme NMM \
+            -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
+
+      - name: Locate .app bundle
+        id: app
+        run: |
+          APP_PATH=$(find build/DerivedData -name "NMM.app" -type d | head -1)
+          if [ -z "$APP_PATH" ]; then
+            echo "NMM.app not found"
+            exit 1
+          fi
+          echo "path=$APP_PATH" >> "$GITHUB_OUTPUT"
+          echo "Found: $APP_PATH"
+          du -sh "$APP_PATH"
+
+      - name: Upload Simulator .app artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NMM-Simulator-app
+          path: ios/${{ steps.app.outputs.path }}
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Build summary
+        run: |
+          echo "### iOS Simulator build succeeded" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Download **NMM-Simulator-app** from the Artifacts section of this workflow run." >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "> Simulator .app cannot be installed on a physical iPhone. Use the **iOS Export IPA** workflow for device builds." >> "$GITHUB_STEP_SUMMARY"

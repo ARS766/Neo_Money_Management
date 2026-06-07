@@ -1,0 +1,6 @@
+{
+  "name": "NMM – Neo Money Management",
+  "description": "Smart Budgeting, Better Future",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

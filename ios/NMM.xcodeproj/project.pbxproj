@@ -1,0 +1,409 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B10000000000000000000001 /* NMMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000001 /* NMMApp.swift */; };
+		B10000000000000000000002 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000002 /* Transaction.swift */; };
+		B10000000000000000000003 /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000003 /* Budget.swift */; };
+		B10000000000000000000004 /* SavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000004 /* SavingsGoal.swift */; };
+		B10000000000000000000005 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000005 /* UserPreferences.swift */; };
+		B10000000000000000000006 /* FinanceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000006 /* FinanceRepository.swift */; };
+		B10000000000000000000007 /* FinanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000007 /* FinanceViewModel.swift */; };
+		B10000000000000000000008 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000008 /* Colors.swift */; };
+		B10000000000000000000009 /* TranslationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000009 /* TranslationHelper.swift */; };
+		B1000000000000000000000A /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000A /* NotificationHelper.swift */; };
+		B1000000000000000000000B /* SecureContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000B /* SecureContentView.swift */; };
+		B1000000000000000000000C /* PrivacyOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000C /* PrivacyOverlay.swift */; };
+		B1000000000000000000000D /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000D /* SplashScreen.swift */; };
+		B1000000000000000000000E /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000E /* OnboardingScreen.swift */; };
+		B1000000000000000000000F /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000F /* LoginScreen.swift */; };
+		B10000000000000000000010 /* DashboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000010 /* DashboardScreen.swift */; };
+		B10000000000000000000011 /* AddTransactionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000011 /* AddTransactionScreen.swift */; };
+		B10000000000000000000012 /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000012 /* AnalyticsScreen.swift */; };
+		B10000000000000000000013 /* BudgetPlannerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000013 /* BudgetPlannerScreen.swift */; };
+		B10000000000000000000014 /* SavingsGoalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000014 /* SavingsGoalScreen.swift */; };
+		B10000000000000000000015 /* HistoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000015 /* HistoryScreen.swift */; };
+		B10000000000000000000016 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000016 /* SettingsScreen.swift */; };
+		B10000000000000000000017 /* MainAppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000017 /* MainAppContainer.swift */; };
+		B10000000000000000000018 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000D /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A10000000000000000000016 /* NMM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NMM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1000000000000000000000D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1000000000000000000000E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A20000000000000000000001 /* NMMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMMApp.swift; sourceTree = "<group>"; };
+		A20000000000000000000002 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		A20000000000000000000003 /* Budget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
+		A20000000000000000000004 /* SavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoal.swift; sourceTree = "<group>"; };
+		A20000000000000000000005 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		A20000000000000000000006 /* FinanceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceRepository.swift; sourceTree = "<group>"; };
+		A20000000000000000000007 /* FinanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceViewModel.swift; sourceTree = "<group>"; };
+		A20000000000000000000008 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		A20000000000000000000009 /* TranslationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationHelper.swift; sourceTree = "<group>"; };
+		A2000000000000000000000A /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		A2000000000000000000000B /* SecureContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureContentView.swift; sourceTree = "<group>"; };
+		A2000000000000000000000C /* PrivacyOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyOverlay.swift; sourceTree = "<group>"; };
+		A2000000000000000000000D /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		A2000000000000000000000E /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
+		A2000000000000000000000F /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		A20000000000000000000010 /* DashboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardScreen.swift; sourceTree = "<group>"; };
+		A20000000000000000000011 /* AddTransactionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionScreen.swift; sourceTree = "<group>"; };
+		A20000000000000000000012 /* AnalyticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsScreen.swift; sourceTree = "<group>"; };
+		A20000000000000000000013 /* BudgetPlannerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetPlannerScreen.swift; sourceTree = "<group>"; };
+		A20000000000000000000014 /* SavingsGoalScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalScreen.swift; sourceTree = "<group>"; };
+		A20000000000000000000015 /* HistoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScreen.swift; sourceTree = "<group>"; };
+		A20000000000000000000016 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		A20000000000000000000017 /* MainAppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppContainer.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A10000000000000000000015 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A10000000000000000000003 = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000005 /* NMM */,
+				A10000000000000000000004 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A10000000000000000000004 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000016 /* NMM.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000005 /* NMM */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000001 /* NMMApp.swift */,
+				A10000000000000000000006 /* Models */,
+				A10000000000000000000007 /* Data */,
+				A10000000000000000000008 /* ViewModels */,
+				A10000000000000000000009 /* Views */,
+				A1000000000000000000000A /* Theme */,
+				A1000000000000000000000B /* Utilities */,
+				A1000000000000000000000C /* Security */,
+				A1000000000000000000000D /* Assets.xcassets */,
+				A1000000000000000000000E /* Info.plist */,
+			);
+			path = NMM;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000006 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000002 /* Transaction.swift */,
+				A20000000000000000000003 /* Budget.swift */,
+				A20000000000000000000004 /* SavingsGoal.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000007 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000005 /* UserPreferences.swift */,
+				A20000000000000000000006 /* FinanceRepository.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000008 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000007 /* FinanceViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000009 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000017 /* MainAppContainer.swift */,
+				A2000000000000000000000D /* SplashScreen.swift */,
+				A2000000000000000000000E /* OnboardingScreen.swift */,
+				A2000000000000000000000F /* LoginScreen.swift */,
+				A20000000000000000000010 /* DashboardScreen.swift */,
+				A20000000000000000000011 /* AddTransactionScreen.swift */,
+				A20000000000000000000012 /* AnalyticsScreen.swift */,
+				A20000000000000000000013 /* BudgetPlannerScreen.swift */,
+				A20000000000000000000014 /* SavingsGoalScreen.swift */,
+				A20000000000000000000015 /* HistoryScreen.swift */,
+				A20000000000000000000016 /* SettingsScreen.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A1000000000000000000000A /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000008 /* Colors.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		A1000000000000000000000B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000009 /* TranslationHelper.swift */,
+				A2000000000000000000000A /* NotificationHelper.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A1000000000000000000000C /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				A2000000000000000000000B /* SecureContentView.swift */,
+				A2000000000000000000000C /* PrivacyOverlay.swift */,
+			);
+			path = Security;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A10000000000000000000002 /* NMM */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A10000000000000000000012 /* Build configuration list for PBXNativeTarget "NMM" */;
+			buildPhases = (
+				A10000000000000000000013 /* Sources */,
+				A10000000000000000000015 /* Frameworks */,
+				A10000000000000000000014 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NMM;
+			productName = NMM;
+			productReference = A10000000000000000000016 /* NMM.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A10000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A10000000000000000000002 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = A10000000000000000000011 /* Build configuration list for PBXProject "NMM" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				id,
+			);
+			mainGroup = A10000000000000000000003;
+			productRefGroup = A10000000000000000000004 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A10000000000000000000002 /* NMM */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A10000000000000000000014 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000018 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A10000000000000000000013 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000001 /* NMMApp.swift in Sources */,
+				B10000000000000000000002 /* Transaction.swift in Sources */,
+				B10000000000000000000003 /* Budget.swift in Sources */,
+				B10000000000000000000004 /* SavingsGoal.swift in Sources */,
+				B10000000000000000000005 /* UserPreferences.swift in Sources */,
+				B10000000000000000000006 /* FinanceRepository.swift in Sources */,
+				B10000000000000000000007 /* FinanceViewModel.swift in Sources */,
+				B10000000000000000000008 /* Colors.swift in Sources */,
+				B10000000000000000000009 /* TranslationHelper.swift in Sources */,
+				B1000000000000000000000A /* NotificationHelper.swift in Sources */,
+				B1000000000000000000000B /* SecureContentView.swift in Sources */,
+				B1000000000000000000000C /* PrivacyOverlay.swift in Sources */,
+				B1000000000000000000000D /* SplashScreen.swift in Sources */,
+				B1000000000000000000000E /* OnboardingScreen.swift in Sources */,
+				B1000000000000000000000F /* LoginScreen.swift in Sources */,
+				B10000000000000000000010 /* DashboardScreen.swift in Sources */,
+				B10000000000000000000011 /* AddTransactionScreen.swift in Sources */,
+				B10000000000000000000012 /* AnalyticsScreen.swift in Sources */,
+				B10000000000000000000013 /* BudgetPlannerScreen.swift in Sources */,
+				B10000000000000000000014 /* SavingsGoalScreen.swift in Sources */,
+				B10000000000000000000015 /* HistoryScreen.swift in Sources */,
+				B10000000000000000000016 /* SettingsScreen.swift in Sources */,
+				B10000000000000000000017 /* MainAppContainer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A1000000000000000000000F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A10000000000000000000010 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C10000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NMM/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.neo.nmm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C10000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NMM/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.neo.nmm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A10000000000000000000011 /* Build configuration list for PBXProject "NMM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000000000000000000000F /* Debug */,
+				A10000000000000000000010 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A10000000000000000000012 /* Build configuration list for PBXNativeTarget "NMM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C10000000000000000000001 /* Debug */,
+				C10000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A10000000000000000000001 /* Project object */;
+}
