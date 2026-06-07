@@ -10,7 +10,7 @@ struct SettingsScreen: View {
 
     @State private var showResetAlert = false
     @State private var showMailComposer = false
-    @State private var exportURL: URL?
+    @State private var exportURL: IdentifiableURL?
 
     private let languages = ["ID", "EN", "ES", "UK", "JA", "ZH"]
     private let currencies = ["Rp", "$", "€", "£", "¥"]
@@ -43,8 +43,8 @@ struct SettingsScreen: View {
                 body: "Halo Developer,\n\nBerikut masukan saya untuk aplikasi NMM:\n\n"
             )
         }
-        .sheet(item: $exportURL) { url in
-            ShareSheet(items: [url])
+        .sheet(item: $exportURL) { item in
+            ShareSheet(items: [item.url])
         }
     }
 
@@ -97,7 +97,7 @@ struct SettingsScreen: View {
     private var exportSection: some View {
         settingsGroup(title: L("export_csv", lang: language)) {
             Button {
-                exportURL = viewModel.exportCSV()
+                exportURL = viewModel.exportCSV().map { IdentifiableURL(url: $0) }
             } label: {
                 Label(L("export_csv", lang: language), systemImage: "square.and.arrow.up")
                     .foregroundStyle(theme.accent)
@@ -150,8 +150,9 @@ struct SettingsScreen: View {
     }
 }
 
-extension URL: @retroactive Identifiable {
-    public var id: String { absoluteString }
+struct IdentifiableURL: Identifiable {
+    let url: URL
+    var id: String { url.absoluteString }
 }
 
 struct MailComposeView: UIViewControllerRepresentable {
